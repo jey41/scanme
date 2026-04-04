@@ -1,0 +1,153 @@
+{
+  "Nav": {
+    "tool": "Tool",
+    "faq": "FAQ",
+    "about": "About"
+  },
+  "Footer": {
+    "tagline": "Free bilingual QR utility for turning links into codes and codes back into links.",
+    "tool": "Tool",
+    "faq": "FAQ",
+    "about": "About"
+  },
+  "Home": {
+    "badge": "Fast QR tools for modern teams",
+    "title": "Turn links into QR codes, or read QR codes back into links.",
+    "description": "Scanme keeps QR workflows simple: generate from a URL, decode from an uploaded image, or scan in real time from your camera with a calm minimalist interface.",
+    "actions": {
+      "primary": "Open the tool",
+      "secondary": "Read the FAQ"
+    },
+    "cards": {
+      "generate": {
+        "title": "Link to QR",
+        "text": "Generate a clean QR from any valid HTTP or HTTPS link."
+      },
+      "decode": {
+        "title": "Image to link",
+        "text": "Upload an image and decode the QR content in the browser."
+      },
+      "scan": {
+        "title": "Camera scan",
+        "text": "Use your device camera to read QR codes in real time."
+      },
+      "download": {
+        "title": "PNG and SVG",
+        "text": "Download generated QR codes in practical formats for web or print."
+      }
+    },
+    "steps": {
+      "one": "Paste a valid link to create a QR, or upload a QR image to decode it.",
+      "two": "Switch to camera mode when you want live scanning on desktop or mobile.",
+      "three": "Copy the result, open the link, or download the generated code as PNG or SVG."
+    }
+  },
+  "ToolPage": {
+    "eyebrow": "Core utility",
+    "title": "Everything you need for a lightweight QR workflow.",
+    "description": "Generate, decode, and scan in one place. The experience is designed to stay fast, focused, and easy to understand."
+  },
+  "Tool": {
+    "tabs": {
+      "generate": "Link → QR",
+      "decode": "QR image → Link",
+      "camera": "Camera scan"
+    },
+    "generate": {
+      "eyebrow": "Generator",
+      "title": "Create a QR code from a link",
+      "description": "Enter a valid URL and Scanme will render a clean QR preview you can download in PNG or SVG.",
+      "label": "Link URL",
+      "generating": "Generating…",
+      "previewLabel": "Preview",
+      "previewTitle": "Generated QR",
+      "previewAlt": "Generated QR code preview",
+      "emptyTitle": "Your QR preview will appear here",
+      "emptyDescription": "Generate a QR first to unlock download actions.",
+      "actions": {
+        "generate": "Generate QR",
+        "reset": "Reset",
+        "downloadPng": "Download PNG",
+        "downloadSvg": "Download SVG"
+      },
+      "errors": {
+        "empty": "Please enter a link first.",
+        "protocol": "Only HTTP and HTTPS links are supported.",
+        "format": "Please enter a valid URL.",
+        "unknown": "Something went wrong while generating the QR code."
+      }
+    },
+    "decode": {
+      "eyebrow": "Upload decoder",
+      "title": "Decode a QR from an image",
+      "description": "Upload a PNG, JPG, or WebP image and Scanme will try to extract the QR content directly in your browser.",
+      "uploadTitle": "Choose a QR image",
+      "uploadDescription": "Click to browse or use your file picker to select an image.",
+      "loading": "Decoding image…",
+      "resultLabel": "Result",
+      "resultTitle": "Decoded content",
+      "empty": "Your decoded result will appear here after a successful upload.",
+      "actions": {
+        "copy": "Copy result",
+        "open": "Open link"
+      },
+      "errors": {
+        "fileType": "Please upload an image file.",
+        "unreadable": "Scanme could not find a readable QR code in that image.",
+        "copy": "Copy failed. Please try again in a secure browser context."
+      }
+    },
+    "camera": {
+      "eyebrow": "Live scanner",
+      "title": "Scan a QR code with your camera",
+      "description": "Start the scanner to read a QR code from your camera feed. You can stop at any time, then open or copy the result.",
+      "cameraLabel": "Available camera",
+      "resultLabel": "Live result",
+      "resultTitle": "Scanned content",
+      "empty": "Start scanning to capture a QR code from your camera.",
+      "liveHint": "Scanning is live. Point your camera at a QR code and keep it steady.",
+      "actions": {
+        "start": "Start scan",
+        "stop": "Stop",
+        "scanning": "Scanning…",
+        "copy": "Copy result",
+        "open": "Open link"
+      },
+      "errors": {
+        "permission": "Camera access is unavailable. Please allow camera permission and try again.",
+        "noDevice": "No camera device was detected on this browser.",
+        "copy": "Copy failed. Please try again in a secure browser context."
+      }
+    }
+  },
+  "Faq": {
+    "eyebrow": "Common questions",
+    "title": "Everything important, without the clutter.",
+    "description": "A lightweight FAQ for the core behavior of the MVP.",
+    "free": {
+      "question": "Is Scanme free?",
+      "answer": "Yes. This MVP focuses on free core QR generation and decoding features."
+    },
+    "privacy": {
+      "question": "Are uploaded images stored?",
+      "answer": "No storage flow is built into this MVP. Uploaded image decoding happens in the browser."
+    },
+    "mobile": {
+      "question": "Does it work on mobile?",
+      "answer": "Yes. The interface is responsive and the camera scanner is intended for both mobile and desktop browsers."
+    },
+    "formats": {
+      "question": "Which formats can I download?",
+      "answer": "Generated QR codes can be downloaded as PNG or SVG."
+    }
+  },
+  "About": {
+    "eyebrow": "About Scanme",
+    "title": "A small utility product with a focused interface.",
+    "description": "Scanme is designed for quick QR tasks without visual noise, account friction, or unnecessary complexity.",
+    "body": {
+      "one": "The product is intentionally narrow in scope: generate a QR from a link, decode a QR from an image, and scan a QR from a camera feed.",
+      "two": "The design direction favors calm spacing, restrained color, and clear actions so the tool stays useful on both desktop and mobile."
+    }
+  }
+}

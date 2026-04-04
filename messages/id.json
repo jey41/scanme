@@ -1,0 +1,153 @@
+{
+  "Nav": {
+    "tool": "Tool",
+    "faq": "FAQ",
+    "about": "Tentang"
+  },
+  "Footer": {
+    "tagline": "Utilitas QR bilingual gratis untuk mengubah link menjadi kode dan kode kembali menjadi link.",
+    "tool": "Tool",
+    "faq": "FAQ",
+    "about": "Tentang"
+  },
+  "Home": {
+    "badge": "Tool QR cepat untuk alur kerja modern",
+    "title": "Ubah link menjadi QR, atau baca QR kembali menjadi link.",
+    "description": "Scanme menjaga alur kerja QR tetap sederhana: buat dari URL, decode dari gambar yang diunggah, atau scan langsung dari kamera dengan antarmuka minimalis yang tenang.",
+    "actions": {
+      "primary": "Buka tool",
+      "secondary": "Lihat FAQ"
+    },
+    "cards": {
+      "generate": {
+        "title": "Link ke QR",
+        "text": "Buat QR yang bersih dari link HTTP atau HTTPS yang valid."
+      },
+      "decode": {
+        "title": "Gambar ke link",
+        "text": "Unggah gambar lalu decode isi QR langsung di browser."
+      },
+      "scan": {
+        "title": "Scan kamera",
+        "text": "Gunakan kamera perangkat untuk membaca QR secara real time."
+      },
+      "download": {
+        "title": "PNG dan SVG",
+        "text": "Unduh QR hasil generate dalam format praktis untuk web atau cetak."
+      }
+    },
+    "steps": {
+      "one": "Tempel link valid untuk membuat QR, atau unggah gambar QR untuk membacanya.",
+      "two": "Pindah ke mode kamera saat Anda ingin scan langsung di desktop atau mobile.",
+      "three": "Salin hasilnya, buka link-nya, atau unduh QR yang dibuat sebagai PNG atau SVG."
+    }
+  },
+  "ToolPage": {
+    "eyebrow": "Utilitas inti",
+    "title": "Semua yang Anda butuhkan untuk alur kerja QR yang ringan.",
+    "description": "Generate, decode, dan scan di satu tempat. Pengalamannya dirancang agar tetap cepat, fokus, dan mudah dipahami."
+  },
+  "Tool": {
+    "tabs": {
+      "generate": "Link → QR",
+      "decode": "Gambar QR → Link",
+      "camera": "Scan kamera"
+    },
+    "generate": {
+      "eyebrow": "Generator",
+      "title": "Buat QR dari sebuah link",
+      "description": "Masukkan URL yang valid dan Scanme akan merender preview QR yang bersih untuk diunduh dalam format PNG atau SVG.",
+      "label": "Link URL",
+      "generating": "Membuat…",
+      "previewLabel": "Preview",
+      "previewTitle": "QR hasil generate",
+      "previewAlt": "Preview QR yang dihasilkan",
+      "emptyTitle": "Preview QR Anda akan muncul di sini",
+      "emptyDescription": "Generate QR terlebih dahulu untuk membuka aksi unduh.",
+      "actions": {
+        "generate": "Generate QR",
+        "reset": "Reset",
+        "downloadPng": "Unduh PNG",
+        "downloadSvg": "Unduh SVG"
+      },
+      "errors": {
+        "empty": "Masukkan link terlebih dahulu.",
+        "protocol": "Hanya link HTTP dan HTTPS yang didukung.",
+        "format": "Masukkan URL yang valid.",
+        "unknown": "Terjadi kesalahan saat membuat QR code."
+      }
+    },
+    "decode": {
+      "eyebrow": "Decoder upload",
+      "title": "Decode QR dari gambar",
+      "description": "Unggah gambar PNG, JPG, atau WebP dan Scanme akan mencoba mengekstrak isi QR langsung di browser Anda.",
+      "uploadTitle": "Pilih gambar QR",
+      "uploadDescription": "Klik untuk memilih file atau gunakan file picker untuk memilih gambar.",
+      "loading": "Sedang decode gambar…",
+      "resultLabel": "Hasil",
+      "resultTitle": "Konten yang terdeteksi",
+      "empty": "Hasil decode akan muncul di sini setelah upload berhasil.",
+      "actions": {
+        "copy": "Salin hasil",
+        "open": "Buka link"
+      },
+      "errors": {
+        "fileType": "Silakan unggah file gambar.",
+        "unreadable": "Scanme tidak menemukan QR yang bisa dibaca pada gambar tersebut.",
+        "copy": "Gagal menyalin. Coba lagi di browser dengan konteks aman."
+      }
+    },
+    "camera": {
+      "eyebrow": "Scanner langsung",
+      "title": "Scan QR dengan kamera",
+      "description": "Mulai scanner untuk membaca QR dari kamera Anda. Anda bisa menghentikannya kapan saja, lalu membuka atau menyalin hasilnya.",
+      "cameraLabel": "Kamera tersedia",
+      "resultLabel": "Hasil langsung",
+      "resultTitle": "Konten hasil scan",
+      "empty": "Mulai scan untuk menangkap QR dari kamera Anda.",
+      "liveHint": "Scan sedang berjalan. Arahkan kamera ke QR dan tahan agar tetap stabil.",
+      "actions": {
+        "start": "Mulai scan",
+        "stop": "Hentikan",
+        "scanning": "Sedang scan…",
+        "copy": "Salin hasil",
+        "open": "Buka link"
+      },
+      "errors": {
+        "permission": "Akses kamera tidak tersedia. Izinkan kamera lalu coba lagi.",
+        "noDevice": "Tidak ada perangkat kamera yang terdeteksi di browser ini.",
+        "copy": "Gagal menyalin. Coba lagi di browser dengan konteks aman."
+      }
+    }
+  },
+  "Faq": {
+    "eyebrow": "Pertanyaan umum",
+    "title": "Semua yang penting, tanpa keramaian visual.",
+    "description": "FAQ ringan untuk perilaku inti dari MVP ini.",
+    "free": {
+      "question": "Apakah Scanme gratis?",
+      "answer": "Ya. MVP ini fokus pada fitur inti generate dan decode QR secara gratis."
+    },
+    "privacy": {
+      "question": "Apakah gambar yang diunggah disimpan?",
+      "answer": "Tidak ada alur penyimpanan di MVP ini. Proses decode gambar dilakukan di browser."
+    },
+    "mobile": {
+      "question": "Apakah bisa dipakai di mobile?",
+      "answer": "Ya. Antarmukanya responsive dan scanner kamera ditujukan untuk browser mobile maupun desktop."
+    },
+    "formats": {
+      "question": "Format apa saja yang bisa diunduh?",
+      "answer": "QR hasil generate bisa diunduh sebagai PNG atau SVG."
+    }
+  },
+  "About": {
+    "eyebrow": "Tentang Scanme",
+    "title": "Produk utilitas kecil dengan antarmuka yang fokus.",
+    "description": "Scanme dirancang untuk tugas QR yang cepat tanpa noise visual, tanpa friksi akun, dan tanpa kompleksitas yang tidak perlu.",
+    "body": {
+      "one": "Produk ini sengaja dibuat sempit ruang lingkupnya: membuat QR dari link, decode QR dari gambar, dan scan QR dari kamera.",
+      "two": "Arah desainnya mengutamakan ruang yang lega, warna yang tertahan, dan aksi yang jelas agar tool tetap nyaman dipakai di desktop maupun mobile."
+    }
+  }
+}
