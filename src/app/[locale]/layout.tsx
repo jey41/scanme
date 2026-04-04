@@ -50,7 +50,7 @@ export default async function LocaleLayout({
       <body className="min-h-screen bg-background text-foreground">
         <NextIntlClientProvider messages={messages}>
           <div className="shell-grid min-h-screen">
-            <SiteHeader />
+            <SiteHeader locale={locale} />
             <main>{children}</main>
             <SiteFooter />
           </div>

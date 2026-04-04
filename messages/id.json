@@ -2,7 +2,8 @@
   "Nav": {
     "tool": "Tool",
     "faq": "FAQ",
-    "about": "Tentang"
+    "about": "Tentang",
+    "history": "Riwayat"
   },
   "Footer": {
     "tagline": "Utilitas QR bilingual gratis untuk mengubah link menjadi kode dan kode kembali menjadi link.",
@@ -51,7 +52,8 @@
     "tabs": {
       "generate": "Link → QR",
       "decode": "Gambar QR → Link",
-      "camera": "Scan kamera"
+      "camera": "Scan kamera",
+      "history": "Riwayat"
     },
     "generate": {
       "eyebrow": "Generator",
@@ -118,6 +120,44 @@
         "noDevice": "Tidak ada perangkat kamera yang terdeteksi di browser ini.",
         "copy": "Gagal menyalin. Coba lagi di browser dengan konteks aman."
       }
+    }
+  },
+  "Auth": {
+    "signIn": "Masuk",
+    "signOut": "Keluar",
+    "setupRequired": "Setup auth belum aktif",
+    "errors": {
+      "signOut": "Gagal keluar. Coba lagi."
+    }
+  },
+  "LoginPage": {
+    "eyebrow": "Autentikasi",
+    "title": "Masuk untuk menyimpan riwayat aktivitas QR Anda.",
+    "description": "Gunakan magic link agar aktivitas generate, decode, scan, dan download QR Anda dapat disimpan ke akun."
+  },
+  "Login": {
+    "eyebrow": "Magic link",
+    "title": "Lanjutkan dengan email Anda",
+    "description": "Kami akan mengirim tautan masuk yang aman ke inbox Anda.",
+    "label": "Alamat email",
+    "submit": "Kirim tautan masuk",
+    "sending": "Mengirim…",
+    "success": "Cek email Anda untuk tautan masuk.",
+    "error": "Kami tidak bisa mengirim tautan masuk. Coba lagi.",
+    "setupRequired": "Supabase belum dikonfigurasi. Tambahkan environment variable dari .env.example untuk mengaktifkan autentikasi."
+  },
+  "History": {
+    "eyebrow": "Aktivitas tersimpan",
+    "title": "Riwayat QR Anda",
+    "description": "Setiap aksi QR saat login akan disimpan di sini agar bisa Anda buka lagi nanti.",
+    "empty": "Belum ada riwayat tersimpan. Generate, decode, scan, atau download QR saat login untuk mulai membangun riwayat Anda.",
+    "setupRequired": "Supabase belum dikonfigurasi. Tambahkan kredensial Anda dan jalankan migrasi SQL sebelum menggunakan riwayat akun.",
+    "loadError": "Kami tidak bisa memuat riwayat QR Anda. Pastikan migrasi dan kebijakan RLS sudah diterapkan, lalu coba lagi.",
+    "actions": {
+      "generated": "Dibuat",
+      "decoded": "Decode dari gambar",
+      "scanned": "Scan dari kamera",
+      "downloaded": "Diunduh"
     }
   },
   "Faq": {

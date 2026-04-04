@@ -1,12 +1,22 @@
 import { ScanQrCode } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 import { Link } from "@/i18n/navigation";
+import { hasSupabaseEnv } from "@/lib/supabase/env";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
+import { AuthButton } from "./auth/auth-button";
 import { LanguageSwitcher } from "./language-switcher";
 
-export function SiteHeader() {
-  const t = useTranslations("Nav");
+type SiteHeaderProps = {
+  locale: string;
+};
+
+export async function SiteHeader({ locale }: SiteHeaderProps) {
+  const t = await getTranslations("Nav");
+  const isConfigured = hasSupabaseEnv();
+  const supabase = await createSupabaseServerClient();
+  const userEmail = isConfigured && supabase ? (await supabase.auth.getUser()).data.user?.email ?? null : null;
 
   return (
     <header className="sticky top-0 z-20 border-b border-black/5 bg-background/85 backdrop-blur-xl">
@@ -28,9 +38,15 @@ export function SiteHeader() {
           <Link href="/about" className="hover:text-foreground">
             {t("about")}
           </Link>
+          <Link href="/tool/history" className="hover:text-foreground">
+            {t("history")}
+          </Link>
         </nav>
 
-        <LanguageSwitcher />
+        <div className="flex items-center gap-3">
+          <AuthButton locale={locale} userEmail={userEmail} isConfigured={isConfigured} />
+          <LanguageSwitcher />
+        </div>
       </div>
     </header>
   );

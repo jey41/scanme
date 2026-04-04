@@ -2,7 +2,8 @@
   "Nav": {
     "tool": "Tool",
     "faq": "FAQ",
-    "about": "About"
+    "about": "About",
+    "history": "History"
   },
   "Footer": {
     "tagline": "Free bilingual QR utility for turning links into codes and codes back into links.",
@@ -51,7 +52,8 @@
     "tabs": {
       "generate": "Link → QR",
       "decode": "QR image → Link",
-      "camera": "Camera scan"
+      "camera": "Camera scan",
+      "history": "History"
     },
     "generate": {
       "eyebrow": "Generator",
@@ -118,6 +120,44 @@
         "noDevice": "No camera device was detected on this browser.",
         "copy": "Copy failed. Please try again in a secure browser context."
       }
+    }
+  },
+  "Auth": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "setupRequired": "Auth setup required",
+    "errors": {
+      "signOut": "Sign out failed. Please try again."
+    }
+  },
+  "LoginPage": {
+    "eyebrow": "Authentication",
+    "title": "Sign in to save your QR activity history.",
+    "description": "Use a magic link so your generated, decoded, scanned, and downloaded QR activity can be saved to your account."
+  },
+  "Login": {
+    "eyebrow": "Magic link",
+    "title": "Continue with your email",
+    "description": "We will send a secure sign-in link to your inbox.",
+    "label": "Email address",
+    "submit": "Send sign-in link",
+    "sending": "Sending…",
+    "success": "Check your email for the sign-in link.",
+    "error": "We could not send the sign-in link. Please try again.",
+    "setupRequired": "Supabase is not configured yet. Add the environment variables from .env.example to enable authentication."
+  },
+  "History": {
+    "eyebrow": "Saved activity",
+    "title": "Your QR history",
+    "description": "Every signed-in QR action is stored here so you can come back to it later.",
+    "empty": "No saved history yet. Generate, decode, scan, or download a QR while signed in to start building your history.",
+    "setupRequired": "Supabase is not configured yet. Add your credentials and run the SQL migration before using account history.",
+    "loadError": "We could not load your QR history. Please confirm the migration and RLS policies are applied, then try again.",
+    "actions": {
+      "generated": "Generated",
+      "decoded": "Decoded from image",
+      "scanned": "Scanned from camera",
+      "downloaded": "Downloaded"
     }
   },
   "Faq": {

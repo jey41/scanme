@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { saveQrHistoryEntry } from "@/lib/history/client";
 import { validateUrl } from "@/lib/qr/validate-url";
 
 const cameraReader = new BrowserQRCodeReader();
@@ -87,9 +88,15 @@ export function QrCameraScanCard() {
         videoRef.current,
         (scanResult, scanError, controls) => {
           if (scanResult) {
-            setResult(scanResult.getText());
+            const text = scanResult.getText();
+            setResult(text);
             setScanning(false);
             controls.stop();
+            void saveQrHistoryEntry({
+              action: "scanned",
+              content: text,
+              payload: { source: "camera" },
+            });
             return;
           }
 

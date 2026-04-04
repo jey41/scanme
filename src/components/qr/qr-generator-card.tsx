@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { saveQrHistoryEntry } from "@/lib/history/client";
 import { downloadPng, downloadSvg } from "@/lib/qr/download-qr";
 import { generateQrPngDataUrl, generateQrSvgMarkup } from "@/lib/qr/generate-qr";
 import { validateUrl } from "@/lib/qr/validate-url";
@@ -50,6 +51,11 @@ export function QrGeneratorCard() {
       ]);
 
       setState({ pngDataUrl, svgMarkup, value: parsed.normalized });
+      void saveQrHistoryEntry({
+        action: "generated",
+        content: parsed.normalized,
+        payload: { source: "tool" },
+      });
     } catch {
       setState(null);
       setStatus("unknown");
@@ -111,11 +117,30 @@ export function QrGeneratorCard() {
               <img src={state.pngDataUrl} alt={t("previewAlt")} className="size-52 rounded-2xl" />
               <p className="max-w-sm break-all text-sm leading-6 text-foreground-muted">{state.value}</p>
               <div className="flex flex-wrap justify-center gap-3">
-                <Button onClick={() => downloadPng(state.pngDataUrl, "scanme-qr.png")}>
+                <Button
+                  onClick={() => {
+                    downloadPng(state.pngDataUrl, "scanme-qr.png");
+                    void saveQrHistoryEntry({
+                      action: "downloaded",
+                      content: state.value,
+                      payload: { format: "png" },
+                    });
+                  }}
+                >
                   <Download className="mr-2 size-4" />
                   {t("actions.downloadPng")}
                 </Button>
-                <Button variant="secondary" onClick={() => downloadSvg(state.svgMarkup, "scanme-qr.svg")}>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    downloadSvg(state.svgMarkup, "scanme-qr.svg");
+                    void saveQrHistoryEntry({
+                      action: "downloaded",
+                      content: state.value,
+                      payload: { format: "svg" },
+                    });
+                  }}
+                >
                   <Download className="mr-2 size-4" />
                   {t("actions.downloadSvg")}
                 </Button>

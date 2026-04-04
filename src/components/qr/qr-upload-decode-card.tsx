@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { saveQrHistoryEntry } from "@/lib/history/client";
 import { decodeQrFromFile } from "@/lib/qr/decode-upload";
 import { validateUrl } from "@/lib/qr/validate-url";
 
@@ -37,6 +38,11 @@ export function QrUploadDecodeCard() {
     try {
       const text = await decodeQrFromFile(file);
       setResult(text);
+      void saveQrHistoryEntry({
+        action: "decoded",
+        content: text,
+        payload: { source: "upload" },
+      });
     } catch {
       setResult(null);
       setError(t("errors.unreadable"));
