@@ -1,12 +1,21 @@
 import { ArrowRight, Camera, ImageUp, QrCode } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
+import { AccordionFaq } from "@/components/accordion-faq";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils/cn";
 import { Link } from "@/i18n/navigation";
 
 export default async function HomePage() {
   const t = await getTranslations("Home");
+  const tFaq = await getTranslations("Faq");
+
+  const faqItems = (["free", "privacy", "mobile", "formats"] as const).map(
+    (key) => ({
+      question: tFaq(`${key}.question`),
+      answer: tFaq(`${key}.answer`),
+    }),
+  );
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-20 px-5 py-10 sm:px-6 lg:px-8 lg:py-16">
@@ -34,14 +43,14 @@ export default async function HomePage() {
               {t("actions.primary")}
               <ArrowRight className="ml-2 size-4" />
             </Link>
-            <Link
-              href="/faq"
+            <a
+              href="#faq"
               className={cn(
                 "inline-flex h-11 items-center justify-center rounded-full border border-border bg-background-elevated px-5 text-sm font-medium text-foreground outline-none hover:bg-white",
               )}
             >
               {t("actions.secondary")}
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -71,6 +80,23 @@ export default async function HomePage() {
             <p className="mt-4 text-lg font-medium leading-8">{step}</p>
           </Card>
         ))}
+      </section>
+
+      <section id="faq" className="scroll-mt-24">
+        <div className="mx-auto max-w-3xl space-y-8">
+          <div className="space-y-4 text-center">
+            <p className="text-sm font-medium text-foreground-muted">
+              {tFaq("eyebrow")}
+            </p>
+            <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+              {tFaq("title")}
+            </h2>
+            <p className="text-lg leading-8 text-foreground-muted">
+              {tFaq("description")}
+            </p>
+          </div>
+          <AccordionFaq items={faqItems} />
+        </div>
       </section>
     </div>
   );

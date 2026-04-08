@@ -13,9 +13,6 @@ export function SiteFooter() {
           <Link href="/tool" className="hover:text-foreground">
             {t("tool")}
           </Link>
-          <Link href="/faq" className="hover:text-foreground">
-            {t("faq")}
-          </Link>
           <Link href="/about" className="hover:text-foreground">
             {t("about")}
           </Link>
