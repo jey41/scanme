@@ -35,6 +35,10 @@
       "download": {
         "title": "PNG dan SVG",
         "text": "Unduh QR hasil generate dalam format praktis untuk web atau cetak."
+      },
+      "shortlink": {
+        "title": "Shortlink",
+        "text": "Pendekkan URL panjang dengan slug kustom opsional untuk berbagi yang mudah."
       }
     },
     "steps": {
@@ -53,6 +57,7 @@
       "generate": "Link → QR",
       "decode": "Gambar QR → Link",
       "camera": "Scan kamera",
+      "shortlink": "Shortlink",
       "history": "Riwayat"
     },
     "generate": {
@@ -119,6 +124,36 @@
         "permission": "Akses kamera tidak tersedia. Izinkan kamera lalu coba lagi.",
         "noDevice": "Tidak ada perangkat kamera yang terdeteksi di browser ini.",
         "copy": "Gagal menyalin. Coba lagi di browser dengan konteks aman."
+      }
+    },
+    "shortlink": {
+      "eyebrow": "Pemendek URL",
+      "title": "Pendekkan URL yang panjang",
+      "description": "Tempel URL panjang dan dapatkan link pendek yang mudah dibagikan. Anda bisa menyesuaikan slug agar lebih mudah diingat.",
+      "labelUrl": "URL panjang",
+      "labelSlug": "Slug kustom",
+      "slugOptional": "(opsional)",
+      "slugHint": "3–32 karakter. Huruf kecil, angka, dan tanda hubung saja.",
+      "creating": "Membuat…",
+      "resultLabel": "Hasil",
+      "resultTitle": "Link pendek Anda",
+      "resultSuccess": "Link pendek berhasil dibuat!",
+      "emptyTitle": "Link pendek Anda akan muncul di sini",
+      "emptyDescription": "Buat link pendek terlebih dahulu untuk melihat hasilnya.",
+      "actions": {
+        "create": "Pendekkan URL",
+        "reset": "Reset",
+        "copy": "Salin link",
+        "copied": "Tersalin!",
+        "open": "Buka link"
+      },
+      "errors": {
+        "empty": "Masukkan URL terlebih dahulu.",
+        "authRequired": "Masuk untuk membuat link pendek.",
+        "slugTaken": "Slug ini sudah dipakai. Pilih yang lain.",
+        "setupRequired": "Supabase belum dikonfigurasi. Tambahkan environment variable untuk mengaktifkan shortlink.",
+        "copy": "Gagal menyalin. Coba lagi di browser dengan konteks aman.",
+        "unknown": "Terjadi kesalahan. Coba lagi."
       }
     }
   },

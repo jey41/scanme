@@ -35,6 +35,10 @@
       "download": {
         "title": "PNG and SVG",
         "text": "Download generated QR codes in practical formats for web or print."
+      },
+      "shortlink": {
+        "title": "URL shortener",
+        "text": "Shorten long URLs with an optional custom slug for easy sharing."
       }
     },
     "steps": {
@@ -53,6 +57,7 @@
       "generate": "Link → QR",
       "decode": "QR image → Link",
       "camera": "Camera scan",
+      "shortlink": "Shortlink",
       "history": "History"
     },
     "generate": {
@@ -119,6 +124,36 @@
         "permission": "Camera access is unavailable. Please allow camera permission and try again.",
         "noDevice": "No camera device was detected on this browser.",
         "copy": "Copy failed. Please try again in a secure browser context."
+      }
+    },
+    "shortlink": {
+      "eyebrow": "URL shortener",
+      "title": "Shorten a long URL",
+      "description": "Paste a long URL and get a short, shareable link. You can customise the slug to make it memorable.",
+      "labelUrl": "Long URL",
+      "labelSlug": "Custom slug",
+      "slugOptional": "(optional)",
+      "slugHint": "3–32 characters. Lowercase letters, numbers, and hyphens only.",
+      "creating": "Creating…",
+      "resultLabel": "Result",
+      "resultTitle": "Your short link",
+      "resultSuccess": "Short link created!",
+      "emptyTitle": "Your short link will appear here",
+      "emptyDescription": "Create a short link first to see the result.",
+      "actions": {
+        "create": "Shorten URL",
+        "reset": "Reset",
+        "copy": "Copy link",
+        "copied": "Copied!",
+        "open": "Open link"
+      },
+      "errors": {
+        "empty": "Please enter a URL first.",
+        "authRequired": "Sign in to create short links.",
+        "slugTaken": "This slug is already taken. Choose a different one.",
+        "setupRequired": "Supabase is not configured yet. Add the environment variables to enable shortcuts.",
+        "copy": "Copy failed. Please try again in a secure browser context.",
+        "unknown": "Something went wrong. Please try again."
       }
     }
   },

@@ -1,16 +1,17 @@
 "use client";
 
-import { History, QrCode, ScanLine } from "lucide-react";
+import { History, Link, QrCode, ScanLine } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { QrCameraScanCard } from "@/components/qr/qr-camera-scan-card";
 import { QrGeneratorCard } from "@/components/qr/qr-generator-card";
 import { QrUploadDecodeCard } from "@/components/qr/qr-upload-decode-card";
-import { Link } from "@/i18n/navigation";
+import { ShortlinkCard } from "@/components/shortlink/shortlink-card";
+import { Link as NavLink } from "@/i18n/navigation";
 import { cn } from "@/lib/utils/cn";
 
-type ToolTab = "generate" | "decode" | "camera";
+type ToolTab = "generate" | "decode" | "camera" | "shortlink";
 
 export function QrToolTabs() {
   const t = useTranslations("Tool.tabs");
@@ -24,6 +25,7 @@ export function QrToolTabs() {
             { key: "generate" as const, icon: QrCode, label: t("generate") },
             { key: "decode" as const, icon: ScanLine, label: t("decode") },
             { key: "camera" as const, icon: ScanLine, label: t("camera") },
+            { key: "shortlink" as const, icon: Link, label: t("shortlink") },
           ].map((tab) => {
           const Icon = tab.icon;
 
@@ -46,18 +48,19 @@ export function QrToolTabs() {
           })}
         </div>
 
-        <Link
+        <NavLink
           href="/tool/history"
           className="inline-flex items-center rounded-full border border-border bg-background-elevated px-4 py-2 text-sm font-medium text-foreground-muted hover:text-foreground"
         >
           <History className="mr-2 size-4" />
           {t("history")}
-        </Link>
+        </NavLink>
       </div>
 
       {activeTab === "generate" ? <QrGeneratorCard /> : null}
       {activeTab === "decode" ? <QrUploadDecodeCard /> : null}
       {activeTab === "camera" ? <QrCameraScanCard /> : null}
+      {activeTab === "shortlink" ? <ShortlinkCard /> : null}
     </div>
   );
 }

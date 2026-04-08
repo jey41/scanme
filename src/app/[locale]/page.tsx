@@ -1,10 +1,10 @@
-import { ArrowRight, Camera, ImageUp, QrCode } from "lucide-react";
+import { ArrowRight, Camera, ImageUp, Link, QrCode } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 import { AccordionFaq } from "@/components/accordion-faq";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils/cn";
-import { Link } from "@/i18n/navigation";
+import { Link as NavLink } from "@/i18n/navigation";
 
 export default async function HomePage() {
   const t = await getTranslations("Home");
@@ -33,7 +33,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link
+            <NavLink
               href="/tool"
               className={cn(
                 "inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-medium outline-none",
@@ -42,7 +42,7 @@ export default async function HomePage() {
             >
               {t("actions.primary")}
               <ArrowRight className="ml-2 size-4" />
-            </Link>
+            </NavLink>
             <a
               href="#faq"
               className={cn(
@@ -56,7 +56,7 @@ export default async function HomePage() {
 
         <Card className="p-6 sm:p-8">
           <div className="grid gap-4 sm:grid-cols-2">
-            {[{ icon: QrCode, title: t("cards.generate.title"), text: t("cards.generate.text") }, { icon: ImageUp, title: t("cards.decode.title"), text: t("cards.decode.text") }, { icon: Camera, title: t("cards.scan.title"), text: t("cards.scan.text") }, { icon: ArrowRight, title: t("cards.download.title"), text: t("cards.download.text") }].map((item) => {
+            {[{ icon: QrCode, title: t("cards.generate.title"), text: t("cards.generate.text") }, { icon: ImageUp, title: t("cards.decode.title"), text: t("cards.decode.text") }, { icon: Camera, title: t("cards.scan.title"), text: t("cards.scan.text") }, { icon: ArrowRight, title: t("cards.download.title"), text: t("cards.download.text") }, { icon: Link, title: t("cards.shortlink.title"), text: t("cards.shortlink.text") }].map((item) => {
               const Icon = item.icon;
 
               return (

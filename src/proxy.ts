@@ -8,7 +8,11 @@ import { routing } from "@/i18n/routing";
 const handleI18nRouting = createMiddleware(routing);
 
 export default async function proxy(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith("/auth/")) {
+  if (
+    request.nextUrl.pathname.startsWith("/auth/") ||
+    request.nextUrl.pathname.startsWith("/s/") ||
+    request.nextUrl.pathname.startsWith("/api/")
+  ) {
     const passthrough = NextResponse.next({ request });
     return updateSession(request, passthrough);
   }
