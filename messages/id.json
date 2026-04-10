@@ -171,14 +171,11 @@
     "description": "Gunakan magic link agar aktivitas generate, decode, scan, dan download QR Anda dapat disimpan ke akun."
   },
   "Login": {
-    "eyebrow": "Magic link",
-    "title": "Lanjutkan dengan email Anda",
-    "description": "Kami akan mengirim tautan masuk yang aman ke inbox Anda.",
-    "label": "Alamat email",
-    "submit": "Kirim tautan masuk",
-    "sending": "Mengirim…",
-    "success": "Cek email Anda untuk tautan masuk.",
-    "error": "Kami tidak bisa mengirim tautan masuk. Coba lagi.",
+    "eyebrow": "Masuk / Daftar",
+    "title": "Lanjutkan dengan Google",
+    "description": "Masuk dengan cepat dan aman menggunakan akun Google Anda.",
+    "submit": "Lanjutkan dengan Google",
+    "sending": "Membuka Google…",
     "setupRequired": "Supabase belum dikonfigurasi. Tambahkan environment variable dari .env.example untuk mengaktifkan autentikasi."
   },
   "History": {

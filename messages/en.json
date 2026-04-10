@@ -171,14 +171,11 @@
     "description": "Use a magic link so your generated, decoded, scanned, and downloaded QR activity can be saved to your account."
   },
   "Login": {
-    "eyebrow": "Magic link",
-    "title": "Continue with your email",
-    "description": "We will send a secure sign-in link to your inbox.",
-    "label": "Email address",
-    "submit": "Send sign-in link",
-    "sending": "Sending…",
-    "success": "Check your email for the sign-in link.",
-    "error": "We could not send the sign-in link. Please try again.",
+    "eyebrow": "Sign In / Sign Up",
+    "title": "Continue with Google",
+    "description": "Sign in quickly and securely with your Google account.",
+    "submit": "Continue with Google",
+    "sending": "Opening Google…",
     "setupRequired": "Supabase is not configured yet. Add the environment variables from .env.example to enable authentication."
   },
   "History": {

@@ -8,9 +8,11 @@ export default async function LoginPage({
   searchParams,
 }: {
   params: Promise<{ locale: string }>;
-  searchParams?: { next?: string };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
   const { locale } = await params;
+  const resolvedSearchParams = await searchParams;
+  const nextParam = typeof resolvedSearchParams?.next === "string" ? resolvedSearchParams.next : undefined;
   const t = await getTranslations("LoginPage");
 
   return (
@@ -23,7 +25,7 @@ export default async function LoginPage({
 
       <LoginForm
         locale={locale}
-        nextPath={searchParams?.next ?? `/${locale}/tool/history`}
+        nextPath={nextParam ?? `/${locale}/tool/history`}
         isConfigured={hasSupabaseEnv()}
       />
     </div>
