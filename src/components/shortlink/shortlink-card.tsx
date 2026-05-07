@@ -41,10 +41,6 @@ export function ShortlinkCard() {
         }),
       });
 
-      if (response.status === 401) {
-        setError(t("errors.authRequired"));
-        return;
-      }
 
       if (response.status === 409) {
         setError(t("errors.slugTaken"));

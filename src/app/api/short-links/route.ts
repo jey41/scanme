@@ -11,6 +11,42 @@ type CreateBody = {
   slug?: unknown;
 };
 
+// ---------------------------------------------------------------------------
+// Simple in-memory rate limiter (per IP, 10 requests / 60 seconds)
+// ---------------------------------------------------------------------------
+
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 10;
+
+const rateLimitMap = new Map<string, number[]>();
+
+function getClientIp(request: NextRequest): string {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+    request.headers.get("x-real-ip") ??
+    "unknown"
+  );
+}
+
+function isRateLimited(ip: string): { limited: boolean; retryAfter: number } {
+  const now = Date.now();
+  const timestamps = rateLimitMap.get(ip) ?? [];
+
+  // Prune entries outside the window
+  const valid = timestamps.filter((t) => now - t < RATE_LIMIT_WINDOW_MS);
+
+  if (valid.length >= RATE_LIMIT_MAX) {
+    const oldest = valid[0]!;
+    const retryAfter = Math.ceil((oldest + RATE_LIMIT_WINDOW_MS - now) / 1000);
+    rateLimitMap.set(ip, valid);
+    return { limited: true, retryAfter };
+  }
+
+  valid.push(now);
+  rateLimitMap.set(ip, valid);
+  return { limited: false, retryAfter: 0 };
+}
+
 export async function GET() {
   if (!hasSupabaseEnv()) {
     return NextResponse.json({ error: "Supabase is not configured." }, { status: 503 });
@@ -45,6 +81,20 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  // Rate limit check
+  const ip = getClientIp(request);
+  const rateCheck = isRateLimited(ip);
+
+  if (rateCheck.limited) {
+    return NextResponse.json(
+      { error: "Too many requests. Please try again later." },
+      {
+        status: 429,
+        headers: { "Retry-After": String(rateCheck.retryAfter) },
+      },
+    );
+  }
+
   if (!hasSupabaseEnv()) {
     return NextResponse.json({ error: "Supabase is not configured." }, { status: 503 });
   }
@@ -63,10 +113,11 @@ export async function POST(request: NextRequest) {
   }
 
   // Validate or generate slug
+  const isCustomSlug = !!(body.slug && typeof body.slug === "string" && body.slug.trim());
   let finalSlug: string;
 
-  if (body.slug && typeof body.slug === "string" && body.slug.trim()) {
-    const parsedSlug = validateSlug(body.slug);
+  if (isCustomSlug) {
+    const parsedSlug = validateSlug(body.slug as string);
 
     if (!parsedSlug.valid) {
       return NextResponse.json({ error: `Invalid slug: ${parsedSlug.error}` }, { status: 400 });
@@ -88,17 +139,42 @@ export async function POST(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  const { error } = await supabase.from("short_links").insert({
-    user_id: user?.id ?? null,
-    slug: finalSlug,
-    original_url: parsedUrl.normalized,
-  });
+  const MAX_RETRIES = 5;
 
-  if (error) {
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    const { error } = await supabase.from("short_links").insert({
+      user_id: user?.id ?? null,
+      slug: finalSlug,
+      original_url: parsedUrl.normalized,
+    });
+
+    if (!error) {
+      const origin = request.nextUrl.origin;
+
+      return NextResponse.json(
+        { slug: finalSlug, shortUrl: `${origin}/s/${finalSlug}` },
+        { status: 201 },
+      );
+    }
+
     console.error("[short-links] insert error:", JSON.stringify(error));
 
     if (error.code === "23505") {
-      return NextResponse.json({ error: "This slug is already taken. Choose a different one." }, { status: 409 });
+      // Custom slug collision — tell the user immediately
+      if (isCustomSlug) {
+        return NextResponse.json({ error: "This slug is already taken. Choose a different one." }, { status: 409 });
+      }
+
+      // Auto-generated slug collision — retry with a new slug
+      if (attempt < MAX_RETRIES) {
+        finalSlug = generateSlug();
+        continue;
+      }
+
+      return NextResponse.json(
+        { error: "Could not generate a unique slug after multiple attempts. Please try again." },
+        { status: 500 },
+      );
     }
 
     // RLS violation or permission error
@@ -109,10 +185,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  const origin = request.nextUrl.origin;
-
+  // Fallback — should not reach here
   return NextResponse.json(
-    { slug: finalSlug, shortUrl: `${origin}/s/${finalSlug}` },
-    { status: 201 },
+    { error: "Could not generate a unique slug after multiple attempts. Please try again." },
+    { status: 500 },
   );
 }

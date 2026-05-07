@@ -41,7 +41,7 @@ export function LoginForm({ locale, nextPath, isConfigured }: LoginFormProps) {
     setStatus("idle");
 
     try {
-      const redirectTo = `${window.location.origin}/auth/callback?next=${encodeURIComponent(redirectPath)}`;
+      const redirectTo = `${window.location.origin}/auth/confirm?next=${encodeURIComponent(redirectPath)}`;
       const { error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
