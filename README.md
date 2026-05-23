@@ -29,6 +29,8 @@ To learn more about Next.js, take a look at the following resources:
 
 This project will help u a lot when u neeed convert any link to qr code or opposite.
 
+The next step, i will make a shorlink fitur, so u can shortner ur link with this tools.
+
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
