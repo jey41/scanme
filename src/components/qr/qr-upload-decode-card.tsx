@@ -1,8 +1,8 @@
 "use client";
 
-import { Copy, ExternalLink, ImageUp, LoaderCircle } from "lucide-react";
+import { Clipboard, Copy, ExternalLink, ImageUp, LoaderCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -10,47 +10,122 @@ import { saveQrHistoryEntry } from "@/lib/history/client";
 import { decodeQrFromFile } from "@/lib/qr/decode-upload";
 import { validateUrl } from "@/lib/qr/validate-url";
 
+/** Extract the first image File from a DataTransfer, or null. */
+function extractImageFile(dt: DataTransfer): File | null {
+  // Pasted screenshots appear in dt.items (not dt.files) on most browsers.
+  if (dt.items) {
+    for (const item of Array.from(dt.items)) {
+      if (item.kind === "file" && item.type.startsWith("image/")) {
+        return item.getAsFile();
+      }
+    }
+  }
+  // Fallback: drag-and-drop populates dt.files directly.
+  for (const file of Array.from(dt.files)) {
+    if (file.type.startsWith("image/")) return file;
+  }
+  return null;
+}
+
 export function QrUploadDecodeCard() {
   const t = useTranslations("Tool.decode");
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
-  async function handleFile(file: File | null) {
-    if (!file) {
-      return;
+  // Counter ref prevents flicker caused by dragenter/dragleave firing on
+  // child elements inside the drop zone.
+  const dragCounter = useRef(0);
+
+  const handleFile = useCallback(
+    async (file: File | null) => {
+      if (!file) {
+        return;
+      }
+
+      if (!file.type.startsWith("image/")) {
+        setResult(null);
+        setError(t("errors.fileType"));
+        if (inputRef.current) {
+          inputRef.current.value = "";
+        }
+        return;
+      }
+
+      setLoading(true);
+      setError(null);
+      setResult(null);
+
+      try {
+        const text = await decodeQrFromFile(file);
+        setResult(text);
+        void saveQrHistoryEntry({
+          action: "decoded",
+          content: text,
+          payload: { source: "upload" },
+        });
+      } catch {
+        setResult(null);
+        setError(t("errors.unreadable"));
+      } finally {
+        setLoading(false);
+        if (inputRef.current) {
+          inputRef.current.value = "";
+        }
+      }
+    },
+    [t],
+  );
+
+  // ---------------------------------------------------------------------------
+  // Global paste listener — Ctrl+V / Cmd+V with an image in the clipboard
+  // ---------------------------------------------------------------------------
+  useEffect(() => {
+    function onPaste(e: ClipboardEvent) {
+      if (!e.clipboardData) return;
+      const file = extractImageFile(e.clipboardData);
+      if (file) {
+        e.preventDefault();
+        void handleFile(file);
+      }
     }
 
-    if (!file.type.startsWith("image/")) {
-      setResult(null);
-      setError(t("errors.fileType"));
-      if (inputRef.current) {
-        inputRef.current.value = "";
-      }
-      return;
-    }
+    window.addEventListener("paste", onPaste);
+    return () => window.removeEventListener("paste", onPaste);
+  }, [handleFile]);
 
-    setLoading(true);
-    setError(null);
-    setResult(null);
+  // ---------------------------------------------------------------------------
+  // Drag & drop handlers
+  // ---------------------------------------------------------------------------
+  function onDragEnter(e: React.DragEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current += 1;
+    if (dragCounter.current === 1) setIsDragging(true);
+  }
 
-    try {
-      const text = await decodeQrFromFile(file);
-      setResult(text);
-      void saveQrHistoryEntry({
-        action: "decoded",
-        content: text,
-        payload: { source: "upload" },
-      });
-    } catch {
-      setResult(null);
-      setError(t("errors.unreadable"));
-    } finally {
-      setLoading(false);
-      if (inputRef.current) {
-        inputRef.current.value = "";
-      }
+  function onDragLeave(e: React.DragEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current -= 1;
+    if (dragCounter.current === 0) setIsDragging(false);
+  }
+
+  function onDragOver(e: React.DragEvent) {
+    e.preventDefault(); // required to allow drop
+  }
+
+  function onDrop(e: React.DragEvent) {
+    e.preventDefault();
+    e.stopPropagation();
+    dragCounter.current = 0;
+    setIsDragging(false);
+
+    const file = extractImageFile(e.dataTransfer);
+    if (file) {
+      void handleFile(file);
     }
   }
 
@@ -77,14 +152,33 @@ export function QrUploadDecodeCard() {
           <p className="max-w-xl text-sm leading-7 text-foreground-muted">{t("description")}</p>
         </div>
 
-        <label className="flex min-h-64 cursor-pointer flex-col items-center justify-center gap-4 rounded-[28px] border border-dashed border-border bg-white/80 p-8 text-center">
+        {/* Drop zone — also acts as the file-input label */}
+        <label
+          className={[
+            "flex min-h-64 cursor-pointer flex-col items-center justify-center gap-4",
+            "rounded-[28px] border-2 border-dashed p-8 text-center",
+            "transition-all duration-200 ease-out",
+            isDragging
+              ? "scale-[1.02] border-primary bg-primary/5 shadow-lg"
+              : "border-border bg-white/80",
+          ].join(" ")}
+          onDragEnter={onDragEnter}
+          onDragLeave={onDragLeave}
+          onDragOver={onDragOver}
+          onDrop={onDrop}
+        >
           <span className="flex size-16 items-center justify-center rounded-full bg-black/5 text-foreground-muted">
             {loading ? <LoaderCircle className="size-6 animate-spin" /> : <ImageUp className="size-6" />}
           </span>
-          <div className="space-y-2">
+          <div className="pointer-events-none space-y-2">
             <p className="text-base font-medium">{loading ? t("loading") : t("uploadTitle")}</p>
             <p className="text-sm leading-6 text-foreground-muted">{t("uploadDescription")}</p>
           </div>
+          {/* Paste hint */}
+          <span className="pointer-events-none mt-1 inline-flex items-center gap-1.5 text-xs text-foreground-muted/70">
+            <Clipboard className="size-3.5" />
+            {t("pasteHint")}
+          </span>
           <input
             ref={inputRef}
             type="file"

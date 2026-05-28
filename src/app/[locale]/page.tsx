@@ -56,17 +56,27 @@ export default async function HomePage() {
 
         <Card className="p-6 sm:p-8">
           <div className="grid gap-4 sm:grid-cols-2">
-            {[{ icon: QrCode, title: t("cards.generate.title"), text: t("cards.generate.text") }, { icon: ImageUp, title: t("cards.decode.title"), text: t("cards.decode.text") }, { icon: Camera, title: t("cards.scan.title"), text: t("cards.scan.text") }, { icon: ArrowRight, title: t("cards.download.title"), text: t("cards.download.text") }, { icon: Link, title: t("cards.shortlink.title"), text: t("cards.shortlink.text") }].map((item) => {
+            {[
+              { icon: QrCode, title: t("cards.generate.title"), text: t("cards.generate.text"), href: "/tool?tab=generate" as const },
+              { icon: ImageUp, title: t("cards.decode.title"), text: t("cards.decode.text"), href: "/tool?tab=decode" as const },
+              { icon: Camera, title: t("cards.scan.title"), text: t("cards.scan.text"), href: "/tool?tab=camera" as const },
+              { icon: ArrowRight, title: t("cards.download.title"), text: t("cards.download.text"), href: "/tool?tab=generate" as const },
+              { icon: Link, title: t("cards.shortlink.title"), text: t("cards.shortlink.text"), href: "/tool?tab=shortlink" as const },
+            ].map((item) => {
               const Icon = item.icon;
 
               return (
-                <div key={item.title} className="rounded-[24px] border border-border bg-white/80 p-5">
-                  <div className="mb-4 flex size-12 items-center justify-center rounded-2xl bg-black/5 text-foreground">
+                <NavLink
+                  key={item.title}
+                  href={item.href}
+                  className="group rounded-[24px] border border-border bg-white/80 p-5 transition-colors hover:border-foreground/20 hover:bg-white"
+                >
+                  <div className="mb-4 flex size-12 items-center justify-center rounded-2xl bg-black/5 text-foreground transition-colors group-hover:bg-foreground group-hover:text-background">
                     <Icon className="size-5" />
                   </div>
                   <h2 className="text-lg font-semibold">{item.title}</h2>
                   <p className="mt-2 text-sm leading-7 text-foreground-muted">{item.text}</p>
-                </div>
+                </NavLink>
               );
             })}
           </div>

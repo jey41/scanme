@@ -2,7 +2,8 @@
 
 import { History, Link, QrCode, ScanLine } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { QrCameraScanCard } from "@/components/qr/qr-camera-scan-card";
 import { QrGeneratorCard } from "@/components/qr/qr-generator-card";
@@ -15,7 +16,24 @@ type ToolTab = "generate" | "decode" | "camera" | "shortlink";
 
 export function QrToolTabs() {
   const t = useTranslations("Tool.tabs");
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
   const [activeTab, setActiveTab] = useState<ToolTab>("generate");
+
+  useEffect(() => {
+    const tab = searchParams.get("tab") as ToolTab;
+    if (tab && ["generate", "decode", "camera", "shortlink"].includes(tab)) {
+      setActiveTab(tab);
+    }
+  }, [searchParams]);
+
+  function handleTabChange(tab: ToolTab) {
+    setActiveTab(tab);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("tab", tab);
+    router.replace(`${pathname}?${params.toString()}`, { scroll: false });
+  }
 
   return (
     <div className="space-y-6">
@@ -33,7 +51,7 @@ export function QrToolTabs() {
             <button
               key={tab.key}
               type="button"
-              onClick={() => setActiveTab(tab.key)}
+              onClick={() => handleTabChange(tab.key)}
               className={cn(
                 "inline-flex items-center rounded-full px-4 py-2 text-sm font-medium",
                 activeTab === tab.key

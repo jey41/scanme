@@ -63,8 +63,8 @@
     "generate": {
       "eyebrow": "Generator",
       "title": "Create a QR code from a link",
-      "description": "Enter a valid URL and Scanme will render a clean QR preview you can download in PNG or SVG.",
-      "label": "Link URL",
+      "description": "Enter one or multiple URLs (one per line) and Scanme will render clean QR previews you can download individually or all at once.",
+      "label": "Link URL(s)",
       "generating": "Generating…",
       "previewLabel": "Preview",
       "previewTitle": "Generated QR",
@@ -75,21 +75,23 @@
         "generate": "Generate QR",
         "reset": "Reset",
         "downloadPng": "Download PNG",
-        "downloadSvg": "Download SVG"
+        "downloadSvg": "Download SVG",
+        "downloadAllZip": "Download All (ZIP)"
       },
       "errors": {
         "empty": "Please enter a link first.",
         "protocol": "Only HTTP and HTTPS links are supported.",
-        "format": "Please enter a valid URL.",
+        "format": "Please enter a valid URL. For bulk generation, ensure each line is a valid URL.",
         "unknown": "Something went wrong while generating the QR code."
       }
     },
     "decode": {
       "eyebrow": "Upload decoder",
       "title": "Decode a QR from an image",
-      "description": "Upload a PNG, JPG, or WebP image and Scanme will try to extract the QR content directly in your browser.",
-      "uploadTitle": "Choose a QR image",
-      "uploadDescription": "Click to browse or use your file picker to select an image.",
+      "description": "Upload, drag & drop, or paste (Ctrl+V) a PNG, JPG, or WebP image and Scanme will try to extract the QR content directly in your browser.",
+      "uploadTitle": "Drop an image here, or click to browse",
+      "uploadDescription": "Drag & drop a QR image, paste a screenshot, or pick a file.",
+      "pasteHint": "Ctrl+V to paste a screenshot",
       "loading": "Decoding image…",
       "resultLabel": "Result",
       "resultTitle": "Decoded content",
@@ -176,6 +178,7 @@
     "description": "Sign in quickly and securely with your Google account.",
     "submit": "Continue with Google",
     "sending": "Opening Google…",
+    "error": "Something went wrong. Please try again.",
     "setupRequired": "Supabase is not configured yet. Add the environment variables from .env.example to enable authentication."
   },
   "History": {

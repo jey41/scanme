@@ -1,6 +1,5 @@
 "use client";
 
-import { Mail, Send } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 
@@ -108,7 +107,7 @@ export function LoginForm({ locale, nextPath, isConfigured }: LoginFormProps) {
 
           {status === "error" ? (
             <p className="text-sm text-red-600 text-center mt-2">
-              Terjadi kesalahan. Silakan coba lagi.
+              {t("error")}
             </p>
           ) : null}
         </div>

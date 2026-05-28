@@ -62,8 +62,8 @@
     },
     "generate": {
       "eyebrow": "Generator",
-      "title": "Buat QR dari sebuah link",
-      "description": "Masukkan URL yang valid dan Scanme akan merender preview QR yang bersih untuk diunduh dalam format PNG atau SVG.",
+      "title": "Buat QR dari link",
+      "description": "Masukkan satu atau banyak URL (satu per baris) dan Scanme akan merender preview QR bersih yang bisa Anda unduh satu per satu atau sekaligus.",
       "label": "Link URL",
       "generating": "Membuat…",
       "previewLabel": "Preview",
@@ -75,21 +75,23 @@
         "generate": "Generate QR",
         "reset": "Reset",
         "downloadPng": "Unduh PNG",
-        "downloadSvg": "Unduh SVG"
+        "downloadSvg": "Unduh SVG",
+        "downloadAllZip": "Unduh Semua (ZIP)"
       },
       "errors": {
         "empty": "Masukkan link terlebih dahulu.",
         "protocol": "Hanya link HTTP dan HTTPS yang didukung.",
-        "format": "Masukkan URL yang valid.",
+        "format": "Masukkan URL yang valid. Untuk generasi bulk, pastikan setiap baris adalah URL yang valid.",
         "unknown": "Terjadi kesalahan saat membuat QR code."
       }
     },
     "decode": {
       "eyebrow": "Decoder upload",
       "title": "Decode QR dari gambar",
-      "description": "Unggah gambar PNG, JPG, atau WebP dan Scanme akan mencoba mengekstrak isi QR langsung di browser Anda.",
-      "uploadTitle": "Pilih gambar QR",
-      "uploadDescription": "Klik untuk memilih file atau gunakan file picker untuk memilih gambar.",
+      "description": "Unggah, seret & lepas, atau tempel (Ctrl+V) gambar PNG, JPG, atau WebP dan Scanme akan mencoba mengekstrak isi QR langsung di browser Anda.",
+      "uploadTitle": "Letakkan gambar di sini, atau klik untuk memilih",
+      "uploadDescription": "Seret & lepas gambar QR, tempel screenshot, atau pilih file.",
+      "pasteHint": "Ctrl+V untuk menempel screenshot",
       "loading": "Sedang decode gambar…",
       "resultLabel": "Hasil",
       "resultTitle": "Konten yang terdeteksi",
@@ -176,6 +178,7 @@
     "description": "Masuk dengan cepat dan aman menggunakan akun Google Anda.",
     "submit": "Lanjutkan dengan Google",
     "sending": "Membuka Google…",
+    "error": "Terjadi kesalahan. Silakan coba lagi.",
     "setupRequired": "Supabase belum dikonfigurasi. Tambahkan environment variable dari .env.example untuk mengaktifkan autentikasi."
   },
   "History": {
